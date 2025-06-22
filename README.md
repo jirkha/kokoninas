@@ -54,7 +54,7 @@ You need to have the following software installed:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/kokoninas.git](https://github.com/your-username/kokoninas.git)
+    git clone [https://github.com/jirkha/kokonina](https://github.com/jirkha/kokonina)
     cd kokoninas
     ```
 
