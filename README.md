@@ -24,7 +24,6 @@ This application was built to give every "kokonina" a chance. It's a simple plac
 - **Backend:** Ruby on Rails (Active Record, Controllers)
 - **Frontend:** ERB templates (Rails views)
 - **Styling:** Tailwind CSS
-> Note: If you encounter Tailwind build issues, make sure your stylesheet is named `application.tailwind.css` and not duplicated across folders. Update paths in `config/tailwind.config.js` if needed.
 - **Interactivity:** Hotwire (Turbo)  
   Turbo updates parts of the page without a full reload.
 
@@ -54,13 +53,24 @@ You need to have the following software installed:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/jirkha/kokoninas.git](https://github.com/jirkha/kokoninas.git)
+    git clone https://github.com/jirkha/kokoninas.git
     cd kokoninas
     ```
 
 2.  **Install Ruby gems:**
     ```bash
     bundle install
+    ```
+
+3.  **Build Tailwind CSS:**
+    Before starting the server, build the Tailwind CSS assets. Otherwise, Rails may raise a missing asset error.
+    ```bash
+    bin/rails tailwindcss:build
+    ```
+
+    If you're actively working on styles, you can also use the watcher:
+    ```bash
+    bin/rails tailwindcss:watch
     ```
 
 ### Database Configuration
