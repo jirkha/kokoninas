@@ -1,0 +1,53 @@
+cs:
+  datetime:
+    distance_in_words:
+      half_a_minute: "půl minuty"
+      less_than_x_seconds:
+        one:   "méně než sekunda"
+        other: "méně než %{count} sekund"
+      x_seconds:
+        one:   "1 sekunda"
+        few:   "%{count} sekundy"
+        other: "%{count} sekund"
+      less_than_x_minutes:
+        one:   "méně než minuta"
+        other: "méně než %{count} minut"
+      x_minutes:
+        one:   "1 minuta"
+        few:   "%{count} minuty"
+        other: "%{count} minut"
+      about_x_hours:
+        one:   "asi hodina"
+        few:   "asi %{count} hodiny"
+        other: "asi %{count} hodin"
+      x_days:
+        one:   "1 den"
+        few:   "%{count} dny"
+        other: "%{count} dní"
+      about_x_months:
+        one:   "asi měsíc"
+        few:   "asi %{count} měsíce"
+        other: "asi %{count} měsíců"
+      x_months:
+        one:   "1 měsíc"
+        few:   "%{count} měsíce"
+        other: "%{count} měsíců"
+      about_x_years:
+        one:   "asi rok"
+        few:   "asi %{count} roky"
+        other: "asi %{count} let"
+      over_x_years:
+        one:   "více než rok"
+        few:   "více než %{count} roky"
+        other: "více než %{count} let"
+      almost_x_years:
+        one:   "skoro rok"
+        few:   "skoro %{count} roky"
+        other: "skoro %{count} let"
+    prompts:
+      year:   "Rok"
+      month:  "Měsíc"
+      day:    "Den"
+      hour:   "Hodina"
+      minute: "Minuta"
+      second: "Sekunda"

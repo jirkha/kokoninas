@@ -1,0 +1,38 @@
+<%# This form is only used for creating a new Kokonina. Editing is not allowed in the application. %>
+<%# This form_with helper creates a form for the Kokonina model. %>
+
+<%= form_with(model: kokonina, class: "space-y-6") do |form| %>
+  <%# The errors object is generated automatically by Rails if there are validation errors. %>
+  <% if kokonina.errors.any? %>
+    <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md relative" role="alert">
+      <span class="block sm:inline">Aplikace nemohla uložit kokoninu kvůli <%= kokonina.errors.count %> chybám.</span>
+      <ul class="list-disc list-inside mt-2">
+        <% kokonina.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%# form.label creates a <label> element for the :title attribute. %>
+    <%# The label is automatically linked to the input field for :title (the 'title' attribute of the model). %>
+    <%= form.label :title, "Název kokoniny", class: "block text-sm font-medium leading-6 text-gray-900" %>
+    <div class="mt-2">
+      <%# :title refers to the 'title' attribute of the Kokonina model. %>
+      <%# form.text_field creates an <input type="text"> for the :title attribute. %>
+      <%= form.text_field :title, class: "block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", placeholder: "Super zlepšovák na..." %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :description, "Popis nápadu", class: "block text-sm font-medium leading-6 text-gray-900" %>
+    <div class="mt-2">
+      <%= form.text_area :description, rows: 6, class: "block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", placeholder: "Podrobně popište, o co jde, jak to funguje a proč je to super (nebo proč je to kokonina)." %>
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <%= form.submit "VLOŽIT NOVOU KOKONINU", class: "cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 uppercase" %>
+  </div>
+<% end %>

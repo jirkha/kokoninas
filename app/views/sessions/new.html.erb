@@ -1,0 +1,40 @@
+<%#
+  This view renders the login/selection page for users (sessions#new).
+  It allows a user to either select an existing profile or create a new one.
+  This file is required for user authentication and session management in the app.
+%>
+<div class="space-y-8">
+  <h2 class="text-2xl font-bold text-center text-slate-700">Vyber si, kdo jsi</h2>
+
+  <%# --- Form for selecting an existing user --- %>
+  <div class="border-t pt-8">
+    <h3 class="text-lg font-semibold mb-4 text-center">Už tu mám profil</h3>
+    <%# form_with creates a form that posts to select_user_path (defined in routes.rb). %>
+    <%= form_with url: select_user_path, method: :post, class: "max-w-sm mx-auto" do |f| %>
+      <div class="mb-4">
+        <%# Label for the user selection dropdown. %>
+        <%= f.label :user_id, "Vyber své jméno:", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%# Dropdown with all users (@users is set in SessionsController#new). %>
+        <%= f.collection_select :user_id, @users, :id, :username, { prompt: "Zvol uživatele..." }, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      </div>
+      <%# Submit button to continue as the selected user. %>
+      <%= f.submit "Pokračovat jako vybraný uživatel", class: "w-full cursor-pointer rounded-md bg-slate-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-700" %>
+    <% end %>
+  </div>
+
+  <%# --- Form for creating a new user --- %>
+  <div class="border-t pt-8">
+    <h3 class="text-lg font-semibold mb-4 text-center">Jsem tu poprvé</h3>
+    <%# form_with creates a form for a new @user object, posts to select_user_path. %>
+    <%= form_with model: @user, url: select_user_path, method: :post, class: "max-w-sm mx-auto" do |f| %>
+      <div class="mb-4">
+        <%# Label for the username text field. %>
+        <%= f.label :username, "Vytvoř si jméno:", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%# Text field for entering a new username. %>
+        <%= f.text_field :username, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500", placeholder: "např. 'timepress_ruby_koko'" %>
+      </div>
+      <%# Submit button to create a new user and continue. %>
+      <%= f.submit "Vytvořit a pokračovat", class: "w-full cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700" %>
+    <% end %>
+  </div>
+</div>

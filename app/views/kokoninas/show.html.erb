@@ -1,0 +1,65 @@
+<%# This view displays the detail of a single Kokonina. %>
+<%# It uses instance variable @kokonina, set in the KokoninasController. %>
+
+<%# kokoninas_path is a Rails route helper that generates the URL for the list of all Kokoninas (index action). %>
+<%= link_to "← Zpět na seznam", kokoninas_path, class: "mb-6 inline-block text-indigo-600 hover:text-indigo-800" %>
+
+<article class="space-y-4">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+    <h2 class="text-3xl font-bold text-slate-800">
+      <%= @kokonina.title %>
+    </h2>
+    <p class="text-sm text-slate-500 mt-2 sm:mt-0 sm:text-right sm:ml-8">
+      Vložil/a <strong class="font-semibold"><%= @kokonina.author.username %></strong>
+      <span class="mx-1">&middot;</span>
+      <%= @kokonina.created_at.strftime("%d. %m. %Y v %H:%M") %>
+    </p>
+  </div>
+
+  <%# Description of the idea %>
+  <div class="prose max-w-none text-slate-700">
+    <%= @kokonina.description %>
+  </div>
+
+  <%# Score display %>
+  <div class="flex items-center space-x-2 mb-2">
+    <% score = @kokonina.score %>
+    <% color_class = score > 0 ? 'text-green-600' : (score < 0 ? 'text-red-600' : 'text-slate-500') %>
+    <div class="text-2xl font-bold <%= color_class %>"><%= score %></div>
+    <div class="text-xs text-slate-500"> Hlasy</div>
+  </div>
+
+  <%# Delete button for the Kokonina %>
+  <%# url: kokonina_path(@kokonina) sets the form action to the destroy route for this record. %>
+  <%# data: { turbo_confirm: ... } shows a confirmation dialog before submitting. %>
+  <%= form_with url: kokonina_path(@kokonina), method: :delete, data: { turbo_confirm: "Opravdu chcete smazat tuto kokoninu?" }, class: "inline-block" do %>
+    <button type="submit"
+      class="px-4 py-2 rounded text-white text-sm font-semibold shadow-sm transition-colors cursor-pointer"
+      style="background: #ff9800; border: none;"
+      onmouseover="this.style.background='#fb8c00'" onmouseout="this.style.background='#ff9800'">
+      Smazat tuto kokoninu
+    </button>
+  <% end %>
+
+  <%# Voting section: shows info about user's vote and voting buttons %>
+  <div class="border-t pt-6 mt-6">
+    <% if current_user %>
+      <% user_vote = @kokonina.votes.find_by(user: current_user) %>
+      <% if user_vote %>
+        <h3 class="text-lg font-semibold mb-4 text-center text-blue-700">
+          Již jste hlasovali pro tento nápad (váš hlas: <strong><%= user_vote.value %></strong>).<br>
+          Hlas můžete změnit tím, že hlasujete znovu.
+        </h3>
+      <% else %>
+        <h3 class="text-lg font-semibold mb-4 text-center">Jak hodnotíš tento nápad?</h3>
+      <% end %>
+    <% else %>
+      <h3 class="text-lg font-semibold mb-4 text-center">Jak hodnotíš tento nápad?</h3>
+    <% end %>
+    <div class="flex justify-center items-center space-x-4">
+      <%# Voting buttons send the value directly as a param %>
+      <%= button_to "+1 Spektotentokulární", kokonina_votes_path(@kokonina, value: 1), method: :post, class: "flex-1 text-center cursor-pointer rounded-md bg-green-500 px-4 py-3 text-lg font-semibold text-white shadow-sm hover:bg-green-600 transition-transform hover:scale-105" %>
+      <%= button_to "-1 Hloupatý", kokonina_votes_path(@kokonina, value: -1), method: :post, class: "flex-1 text-center cursor-pointer rounded-md bg-red-500 px-4 py-3 text-lg font-semibold text-white shadow-sm hover:bg-red-600 transition-transform hover:scale-105" %>
+    </div>
+  </div>
+</article>

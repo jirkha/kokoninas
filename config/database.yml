@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] || "localhost" %>
+
+development:
+  <<: *default
+  database: kokoninas_development
+
+test:
+  <<: *default
+  database: kokoninas_test
+
+production:
+  <<: *default
+  database: kokoninas_production
