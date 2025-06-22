@@ -31,7 +31,10 @@ This application was built to give every "kokonina" a chance. It's a simple plac
 
 This is a simplified version of the application, built as a portfolio project for a job application. The main goal was to demonstrate basic Rails skills.
 
+Please note: the code contains **more comments than usual**. These comments explain the function of different parts of the code. Normally, a production application would have fewer comments. Since I am still learning Ruby and Ruby on Rails, these notes help me understand the logic behind each component.
+
 This project can be easily extended with more advanced features.
+
 
 ---
 
