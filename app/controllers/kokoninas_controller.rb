@@ -1,7 +1,7 @@
 class KokoninasController < ApplicationController
   # before_action calls the require_user method before ":new" and ":create" actions.
   # require_user is defined in ApplicationController. It checks if a user is signed in.
-  before_action :require_user, only: [:new, :create]
+  before_action :require_user, only: [ :new, :create ]
 
   # Shows a list of all kokoninas, sorted by score from highest to lowest.
   def index
